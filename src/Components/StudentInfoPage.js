@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./FeedBack.css";
 import logo from "./Images/Ansar.png";
 
@@ -7,21 +7,12 @@ function StudentInfoPage() {
   const [name, setName] = useState("");
   const [code, setCode] = useState("");
   const navigate = useNavigate();
-  const location = useLocation();
-
-  // If the state has name and code, set them from location
-  React.useEffect(() => {
-    if (location.state) {
-      setName(location.state.name);
-      setCode(location.state.code);
-    }
-  }, [location]);
 
   const handleNext = () => {
     if (name && code) {
       // Submit student data to the Django API
       const studentData = { name, student_id: code };
-      fetch("http://localhost:8000/api/feedbacklogin/", {
+      fetch("https://support.ansar.in/api/feedbacklogin/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
